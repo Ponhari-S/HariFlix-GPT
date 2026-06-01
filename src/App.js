@@ -1,7 +1,9 @@
+import Main from "./components/Main";
+
 function App() {
   return (
     <div>
-      <h1 className='text-red-900 font-bold'>Hello</h1>
+      <Main />
     </div>
   );
 }
