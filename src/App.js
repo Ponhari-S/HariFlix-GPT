@@ -1,9 +1,10 @@
-import Main from "./components/Main";
+import { RouterProvider } from "react-router-dom";
+import appRouter from "./components/Main";
 
 function App() {
   return (
     <div>
-      <Main />
+      <RouterProvider router={appRouter} />
     </div>
   );
 }
