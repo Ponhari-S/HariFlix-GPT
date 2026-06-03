@@ -1,6 +1,10 @@
 import { useState } from "react";
+import { validateEmail, validatePassword } from "./Validate";
 function Login() {
     const [signIn,setSignIn] = useState(true);
+    const [error,setError] = useState("");
+    const [email,setEmail] = useState("");
+    const [pwd,setPwd] = useState("");
     return (
       <div className="relative w-full h-screen">
         <img
@@ -30,20 +34,33 @@ function Login() {
                 type="email"
                 placeholder="Email"
                 className="p-3 rounded-md bg-gray-700 text-white outline-none focus:ring-2 focus:ring-red-600"
+                onChange={(e) => {setEmail(e.target.value);}}
               />
               <input
                 type="password"
                 placeholder="Password"
                 className="p-3 rounded-md bg-gray-700 text-white outline-none focus:ring-2 focus:ring-red-600"
+                onChange={(e) => {setPwd(e.target.value);}}
               />
               <button
                 type="submit"
                 className="bg-red-600 py-2 rounded-md hover:bg-red-700 transition font-semibold"
-                onClick={(e) => {e.preventDefault();}}
+                onClick={(e) => {e.preventDefault(); 
+                  if (!validateEmail(email)) {
+                    setError("Please enter a valid email address.");
+                    return;
+                  }
+                  else if (!validatePassword(pwd)) {
+                    setError("Please enter a valid password.");
+                    return;
+                  }
+                  else setError("");
+                }}
               >
                 {signIn ? "Sign In" : "Sign Up"}
               </button>
             </form>
+            {error && <p className="text-red-500 mt-2">{error}</p>}
             {signIn && <h1 className="pt-4 text-red-700 cursor-pointer" onClick={() => setSignIn(false)}>New to HariFlix ?? Sign up</h1>}
             {!signIn && <h1 className="pt-4 text-red-700 cursor-pointer" onClick={() => setSignIn(true)}>Already have an account ?? Sign in</h1>}
           </div>
