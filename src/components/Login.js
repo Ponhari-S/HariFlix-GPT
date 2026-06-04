@@ -1,10 +1,45 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { validateEmail, validatePassword } from "./Validate";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../utils/firebase";
 function Login() {
     const [signIn,setSignIn] = useState(true);
     const [error,setError] = useState("");
     const [email,setEmail] = useState("");
     const [pwd,setPwd] = useState("");
+    const emailRef = useRef();
+    const pwdRef = useRef();
+    const nameRef = useRef();
+    const navigate = useNavigate();
+    const handleSignUp = async (email, password) => {
+      createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+      const user = userCredential.user;
+      updateProfile(user, {
+        displayName: nameRef.current.value,
+      });
+      })
+      .then(() => navigate("/browse"))
+      .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setError(errorCode+errorMessage);
+      });
+    }
+    const handleSignIn = async (email, password) => {
+      signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+      const user = userCredential.user;
+      console.log(user);
+      })
+      .then(() => navigate("/browse"))
+      .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setError(errorCode+errorMessage);
+      });
+    }
     return (
       <div className="relative w-full h-screen">
         <img
@@ -26,17 +61,20 @@ function Login() {
             <form className="flex flex-col gap-4">
                 {!signIn &&
                 <input
+                ref={nameRef}
                 type="text"
                 placeholder="Username"
                 className="p-3 rounded-md bg-gray-700 text-white outline-none focus:ring-2 focus:ring-red-600"
               />}
               <input
+              ref={emailRef}
                 type="email"
                 placeholder="Email"
                 className="p-3 rounded-md bg-gray-700 text-white outline-none focus:ring-2 focus:ring-red-600"
                 onChange={(e) => {setEmail(e.target.value);}}
               />
               <input
+              ref={pwdRef}
                 type="password"
                 placeholder="Password"
                 className="p-3 rounded-md bg-gray-700 text-white outline-none focus:ring-2 focus:ring-red-600"
@@ -55,7 +93,9 @@ function Login() {
                     return;
                   }
                   else setError("");
-                }}
+                  signIn ? handleSignIn(email, pwd) : handleSignUp(email, pwd);
+                }
+              }
               >
                 {signIn ? "Sign In" : "Sign Up"}
               </button>
