@@ -3,6 +3,9 @@ import { validateEmail, validatePassword } from "./Validate";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../utils/firebase";
+import { useDispatch} from "react-redux";
+import { setUser} from "../utils/userSlice";
+
 function Login() {
     const [signIn,setSignIn] = useState(true);
     const [error,setError] = useState("");
@@ -12,13 +15,18 @@ function Login() {
     const pwdRef = useRef();
     const nameRef = useRef();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     const handleSignUp = async (email, password) => {
       createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
       const user = userCredential.user;
-      updateProfile(user, {
+      await updateProfile(user, {
         displayName: nameRef.current.value,
+        photoURL: "https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
       });
+      dispatch(setUser({name:auth.currentUser.displayName, profile:auth.currentUser.photoURL}));
+
       })
       .then(() => navigate("/browse"))
       .catch((error) => {
@@ -31,6 +39,7 @@ function Login() {
       signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
       const user = userCredential.user;
+      dispatch(setUser({name:user.displayName, profile:user.photoURL}));
       console.log(user);
       })
       .then(() => navigate("/browse"))
