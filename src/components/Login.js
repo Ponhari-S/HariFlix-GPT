@@ -1,10 +1,10 @@
 import { useState, useRef } from "react";
 import { validateEmail, validatePassword } from "./Validate";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 import { auth } from "../utils/firebase";
 import { useDispatch} from "react-redux";
 import { setUser} from "../utils/userSlice";
+import { PHOTO_URL } from "../utils/constants";
 
 function Login() {
     const [signIn,setSignIn] = useState(true);
@@ -14,7 +14,6 @@ function Login() {
     const emailRef = useRef();
     const pwdRef = useRef();
     const nameRef = useRef();
-    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const handleSignUp = async (email, password) => {
@@ -23,12 +22,11 @@ function Login() {
       const user = userCredential.user;
       await updateProfile(user, {
         displayName: nameRef.current.value,
-        photoURL: "https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
+        photoURL: PHOTO_URL
       });
       dispatch(setUser({name:auth.currentUser.displayName, profile:auth.currentUser.photoURL}));
 
       })
-      .then(() => navigate("/browse"))
       .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
@@ -42,7 +40,6 @@ function Login() {
       dispatch(setUser({name:user.displayName, profile:user.photoURL}));
       console.log(user);
       })
-      .then(() => navigate("/browse"))
       .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
