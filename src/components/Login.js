@@ -38,7 +38,6 @@ function Login() {
       .then((userCredential) => {
       const user = userCredential.user;
       dispatch(setUser({name:user.displayName, profile:user.photoURL}));
-      console.log(user);
       })
       .catch((error) => {
           const errorCode = error.code;

@@ -31,7 +31,7 @@ function Header() {
           })
           .catch((err) => console.log(err));
       };
-    
+
     return (
       <div className="absolute w-full h-16 flex bg-gradient-to-b from-black to-transparent z-10 justify-between">
         <svg

@@ -1,7 +1,14 @@
+import MainMovie from "./MainMovie";
+import SecondaryMovie from "./SecondaryMovie";
+import { useNowPlaying } from "../helper/useNowPlaying";
+
 function Browse() {
+
+    useNowPlaying();
     return (
         <div className="w-full h-screen flex items-center justify-center">
-            <h1 className="text-4xl font-bold">Welcome to the Browse Page</h1>
+            <MainMovie />
+            <SecondaryMovie />
         </div>
     );
 }
