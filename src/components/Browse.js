@@ -6,7 +6,7 @@ function Browse() {
 
     useNowPlaying();
     return (
-        <div>
+        <div className="relative w-screen">
             <MainMovie />
             <SecondaryMovie />
         </div>

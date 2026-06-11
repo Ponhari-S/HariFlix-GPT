@@ -7,9 +7,9 @@ const MainMovie = () =>{
     const movie = useSelector((state) => state.movie.nowPlaying)
     if (!movie || movie.length === 0) return null;
     return (
-        <div>
+        <div className="w-screen">
             <VideoInfo movie={movie?.[0]} />
-            <VideoTrailer />
+            <VideoTrailer movie={movie?.[0]}/>
         </div>
     )
 }
