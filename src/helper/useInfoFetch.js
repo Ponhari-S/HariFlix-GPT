@@ -16,5 +16,5 @@ export const useInfoFetch = (id) =>{
           dispatch(addInfo(json));
         };
         if (id) getInfoFetch();
-    }, [id,dispatch]);
+    }, [info,id,dispatch]);
 };

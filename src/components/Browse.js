@@ -5,9 +5,11 @@ import { useNowPlaying } from "../helper/useNowPlaying";
 function Browse() {
 
     useNowPlaying();
+
     return (
-        <div className="w-screen">
+        <div className="w-screen scrollbar-hide">
             <MainMovie />
+            <SecondaryMovie />
         </div>
     );
 }

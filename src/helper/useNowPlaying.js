@@ -1,20 +1,24 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addNowPlaying } from "../utils/movieSlice";
+import { addAction, addComedy, addHorror, addNowPlaying } from "../utils/movieSlice";
 import { API_KEY } from "../utils/constants";
 
 export const useNowPlaying = () =>{
     
     const dispatch = useDispatch();
-    const movies=useSelector((state)=>state.movie.NowPlaying)
+    const movies=useSelector((state)=>state.movie.nowPlaying)
 
     useEffect(()=>{
         if(movies) return;
         async function getNowPlayingMovies() {
             const data=await fetch(`https://api.watchmode.com/v1/releases/?apiKey=${API_KEY}`);
             const json=await data.json();
-            dispatch(addNowPlaying(json.releases));
+            const releases = json.releases || [];
+            dispatch(addNowPlaying(releases.slice(0,20)));
+            dispatch(addAction(releases.slice(20,40)));
+            dispatch(addComedy(releases.slice(40,60)));
+            dispatch(addHorror(releases.slice(60,80)));
         }
         getNowPlayingMovies();
-    },[dispatch])
+    },[dispatch,movies])
 }

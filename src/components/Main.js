@@ -5,7 +5,7 @@ import Browse from "./Browse";
 
 function Main() {
     return (
-        <div>
+        <div className="scrollbar-hide">
             <Header />
             <Outlet />
         </div>

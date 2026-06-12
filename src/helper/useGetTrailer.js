@@ -15,7 +15,7 @@ const useGetTrailer = (title) => {
         }
 
         if(title) getTrailer(title);
-    },[title,dispatch]);
+    },[videoId,title,dispatch]);
 }
 
 export default useGetTrailer;
