@@ -5,7 +5,7 @@ const VideoInfo = ({movie}) => {
     useInfoFetch(movie?.id)
     const movie_info = useSelector((state) => state.movie.info);
     return (
-        <div className="pt-96 pl-32">
+        <div className="text-white absolute pt-96 pl-32 w-screen aspect-video bg-gradient-to-r from-black to-transparent">
             <h1 className="text-4xl font-bold">{movie?.title}</h1>
             <p className="pt-2 w-1/3">{movie_info?.plot_overview}</p>
             <div className="py-5 flex flex-row justify-start gap-x-10">
