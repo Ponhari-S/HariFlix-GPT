@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { removeUser,setUser } from "../utils/userSlice";
 import { useSelector } from "react-redux";
+import { addGPTFlag } from "../utils/gptSlice";
 function Header() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -32,6 +33,11 @@ function Header() {
           .catch((err) => console.log(err));
       };
 
+      const handleGPT = () => {
+        dispatch(addGPTFlag());
+      }
+
+      const gptTrue=useSelector((state)=>state.gpt.gptTrue);
     return (
       <div className="absolute w-full h-16 flex bg-gradient-to-b from-black to-transparent z-10 justify-between">
         <svg
@@ -48,11 +54,14 @@ function Header() {
         </svg>
           {userData.name!=null && (
             <div className="flex flex-row gap-3 items-center pr-5">
+            <button className="px-2 h-8 bg-red-600 text-white rounded-md hover:bg-red-700 transition" onClick={()=>handleGPT()}>
+              {gptTrue ? "Home" : "GPT Search"}
+            </button>
             <img src={userData.profile} className="w-8 h-8 rounded-full" alt="Logo"></img>
-            <p className="font-bold text-red-900" >{userData.name}</p>
+            <p className="font-bold text-red-800" >{userData.name}</p>
             <button
               onClick={() => handleSignOut()}
-              className="px-2 h-8 bg-red-600 text-white rounded-md"
+              className="px-2 h-8 bg-red-600 text-white rounded-md hover:bg-red-700 transition"
             >
               Sign Out
             </button>
