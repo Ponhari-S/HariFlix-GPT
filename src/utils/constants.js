@@ -1,5 +1,4 @@
 export const PHOTO_URL="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
-
-export const API_KEY="ctPfz6hreFJikuuRd9dYwmSkDU417S8WJZYaXIfM"
-
-export const YT_API_KEY="AIzaSyC0eu_YhdUGIg1S0IMGprchzMGiXR4K8og"
+export const YT_API=process.env.REACT_APP_YT_API;
+export const MOVIE_API=process.env.REACT_APP_MOVIE_API;
+export const GEMINI_API=process.env.REACT_APP_GEMINI_API;

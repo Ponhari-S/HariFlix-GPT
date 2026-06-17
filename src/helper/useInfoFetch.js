@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addInfo } from "../utils/movieSlice";
-import { API_KEY } from "../utils/constants";
+import { MOVIE_API } from "../utils/constants";
 
 export const useInfoFetch = (id) =>{
     
@@ -11,7 +11,7 @@ export const useInfoFetch = (id) =>{
     useEffect(() => {
       if (!id || info) return;
       const getInfoFetch = async () => {
-          const data = await fetch(`https://api.watchmode.com/v1/title/${id}/details/?apiKey=${API_KEY}`);
+          const data = await fetch(`https://api.watchmode.com/v1/title/${id}/details/?apiKey=${MOVIE_API}`);
           const json = await data.json();
           dispatch(addInfo(json));
         };

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { removeUser,setUser } from "../utils/userSlice";
 import { useSelector } from "react-redux";
-import { addGPTFlag } from "../utils/gptSlice";
+import { addGPTFlag, toggleLang } from "../utils/gptSlice";
 function Header() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -38,6 +38,7 @@ function Header() {
       }
 
       const gptTrue=useSelector((state)=>state.gpt.gptTrue);
+      const lang=useSelector((state)=>state.gpt.lang);
     return (
       <div className="absolute w-full h-16 flex bg-gradient-to-b from-black to-transparent z-10 justify-between">
         <svg
@@ -54,6 +55,12 @@ function Header() {
         </svg>
           {userData.name!=null && (
             <div className="flex flex-row gap-3 items-center pr-5">
+            {gptTrue && <select value={lang} onChange={(e) => dispatch(toggleLang(e.target.value))} className="bg-transparent text-white border border-gray-600 cursor-pointer outline-none hover:border-red-600 transition">
+                            <option value="en" className="bg-black text-white">English</option>
+                            <option value="ger" className="bg-black text-white">German</option>
+                            <option value="tam" className="bg-black text-white">Tamil</option>
+                            <option value="tel" className="bg-black text-white">Telugu</option>
+                        </select> }
             <button className="px-2 h-8 bg-red-600 text-white rounded-md hover:bg-red-700 transition" onClick={()=>handleGPT()}>
               {gptTrue ? "Home" : "GPT Search"}
             </button>
