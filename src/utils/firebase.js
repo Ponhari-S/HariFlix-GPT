@@ -1,9 +1,9 @@
 import { initializeApp } from "firebase/app";
-//import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
+import { FIREBASE_API } from "./constants";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBuQPCXXfJmfa1V5MhAH8DRGhoRuoNO4_M",
+  apiKey: FIREBASE_API,
   authDomain: "hariflix-gpt.firebaseapp.com",
   projectId: "hariflix-gpt",
   storageBucket: "hariflix-gpt.firebasestorage.app",
@@ -13,6 +13,5 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-//const analytics = getAnalytics(app);
 export const auth = getAuth(app);
 export default app;

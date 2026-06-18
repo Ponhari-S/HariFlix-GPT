@@ -1,3 +1,4 @@
+import GPTMovieSuggestions from "./GPTMovieSuggestions";
 import GPTSearchBar from "./GPTSearchBar";
 
 const GPTSearch = () => {
@@ -13,8 +14,13 @@ const GPTSearch = () => {
           aria-hidden="true"
         />
         <div className="absolute inset-0 bg-black/50 -z-20" />
+        <div className="flex flex-col gap-16">
         <div className="w-full pt-40 flex justify-center">
         <GPTSearchBar />
+        </div>
+        <div className="flex justify-center">
+        <GPTMovieSuggestions />
+        </div>
         </div>
         </div>
     )
