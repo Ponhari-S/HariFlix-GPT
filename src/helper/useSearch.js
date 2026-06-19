@@ -26,8 +26,6 @@ const useSearch = (movieNames) => {
         ).then((res) => res.json())
       );
       const movies = await Promise.all(detailPromises);
-
-      console.log("Movies with details:", movies);
       dispatch(addGPTMovieResults(movies));
     };
 
