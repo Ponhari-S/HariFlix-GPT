@@ -45,7 +45,6 @@ function Header() {
   return (
     <div className="absolute w-full flex flex-col items-center md:flex-row md:justify-between md:items-center bg-gradient-to-b from-black to-transparent z-10 gap-3 md:gap-0 pb-3 md:pb-0">
       
-      {/* Logo - top center on mobile, left on desktop */}
       <svg
         viewBox="0 0 111 30"
         version="1.1"
@@ -59,7 +58,6 @@ function Header() {
         </g>
       </svg>
 
-      {/* User controls - centered below logo on mobile, inline on desktop */}
       {userData.name != null && (
         <div className="flex flex-row flex-wrap justify-center md:justify-start gap-3 items-center px-3 md:px-0 md:pr-5">
           {gptTrue && (
