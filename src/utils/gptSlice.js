@@ -7,6 +7,7 @@ const gptSlice = createSlice({
         lang:'en',
         results:null,
         gptResults:null,
+        clickedMovie:null,
     },
     reducers:{
         addGPTFlag: (state)=>{
@@ -20,9 +21,15 @@ const gptSlice = createSlice({
         },
         addGPTMovieResults: (state,action) =>{
             state.gptResults=action.payload
+        },
+        addClicked: (state,action)=>{
+            state.clickedMovie=action.payload;
+        },
+        removeClicked: (state)=>{
+            state.clickedMovie=null;
         }
     }
 })
 
-export const {addGPTFlag,toggleLang,addGPTResults,addGPTMovieResults} = gptSlice.actions;
+export const {addGPTFlag,toggleLang,addGPTResults,addGPTMovieResults, addClicked, removeClicked} = gptSlice.actions;
 export default gptSlice.reducer;

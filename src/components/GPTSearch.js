@@ -1,7 +1,12 @@
+import { useSelector } from "react-redux";
 import GPTMovieSuggestions from "./GPTMovieSuggestions";
 import GPTSearchBar from "./GPTSearchBar";
+import MoviePlay from "./MoviePlay";
 
 const GPTSearch = () => {
+    const clicked=useSelector((state)=>state.gpt.clickedMovie);
+    console.log(clicked);
+    if(clicked) return (<MoviePlay movie={clicked} />)
     return (
         <div className="relative w-full h-screen">
             <img
